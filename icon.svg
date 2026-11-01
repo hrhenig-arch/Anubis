@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" role="img" aria-label="Anubis Client">
+  <defs>
+    <linearGradient id="gold" x1="46" y1="10" x2="158" y2="212" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f9e5c0"/>
+      <stop offset=".48" stop-color="#e3b24c"/>
+      <stop offset="1" stop-color="#b07f3a"/>
+    </linearGradient>
+  </defs>
+  <g stroke="url(#gold)" stroke-width="2.4" stroke-linecap="round" opacity=".38">
+    <path d="M52 118h96"/>
+    <path d="M56 134h88"/>
+    <path d="M62 150h76"/>
+    <path d="M72 166h56"/>
+  </g>
+  <g fill="url(#gold)">
+    <path d="M120 8 139 72 109 64Z"/>
+    <path d="M80 8 61 72 91 64Z"/>
+    <path d="M100 56c19 0 41 17 45 40 3 19-5 39-17 55-10 14-20 26-28 36z"/>
+    <path d="M100 56c-19 0-41 17-45 40-3 19 5 39 17 55 10 14 20 26 28 36z"/>
+  </g>
+  <g fill="none" stroke="#08070a" stroke-width="3.4" stroke-linecap="round">
+    <circle cx="100" cy="84" r="5"/>
+    <path d="M100 89v25"/>
+    <path d="M91 95h18"/>
+  </g>
+  <path d="M62 196c11 13 24 19 38 19s27-6 38-19" fill="none" stroke="url(#gold)" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="100" cy="207" r="5.5" fill="url(#gold)"/>
+</svg>

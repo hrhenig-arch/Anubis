@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANUBIS Client — The most powerful client for DonutSMP</title>
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<meta name="description" content="ANUBIS Client. 125 modules, lightweight, built for DonutSMP.">
+<meta property="og:title" content="ANUBIS Client">
+<meta property="og:description" content="125 modules. Lightweight. Built for DonutSMP.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Anubis Client">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ANUBIS Client">
+<meta name="twitter:description" content="125 modules. Lightweight. Built for DonutSMP.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#08070a">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Anubis Client",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Windows, macOS, Linux",
+  "softwareVersion": "1.0",
+  "description": "Anubis Client is a lightweight Minecraft client for DonutSMP with 125 modules across combat, movement, render, visuals and base finding.",
+  "featureList": "Kill Aura, Crystal Aura, Auto Totem, Speed, Fly, Elytra Fly, ESP, Nametags, Tracers, Xray, Spawner Protect, Chunk Finder",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+
+:root{
+  --bg:#08070a;
+  --panel:#0e0c0e;
+  --line:rgba(255,255,255,.07);
+  --line-2:rgba(255,255,255,.13);
+  --text:#f4f1ec;
+  --muted:#8d8781;
+  --gold:#e7c07c;
+  --gold-2:#c39a5c;
+  --violet:#8b6cf0;
+  --maxw:1180px;
+}
+
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.5;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(60% 45% at 78% 8%, rgba(198,152,88,.09), transparent 70%),
+    radial-gradient(50% 40% at 12% 42%, rgba(120,84,190,.07), transparent 70%),
+    radial-gradient(60% 50% at 50% 105%, rgba(198,152,88,.05), transparent 70%);
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(231,192,124,.25);color:#fff}
+
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.grad{
+  background:linear-gradient(178deg,#f7e5c0 4%,#e0b87e 42%,#bd9153 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+
+/* ---------- header ---------- */
+.site-head{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  border-bottom:1px solid transparent;transition:background .3s,border-color .3s,backdrop-filter .3s;
+}
+.site-head.scrolled{
+  background:rgba(8,7,10,.78);backdrop-filter:blur(14px) saturate(140%);
+  border-bottom-color:var(--line);
+}
+.head-in{display:flex;align-items:center;gap:28px;height:76px}
+.brand{display:flex;align-items:center;gap:10px;flex:none}
+.brand .logo-mark{width:23px;height:26px;flex:none}
+.brand span{font-size:12.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.brand em{font-style:normal;font-weight:500;color:var(--muted);letter-spacing:.22em}
+.nav{display:flex;align-items:center;gap:34px;margin-left:auto}
+.nav a{font-size:13.5px;color:#b6b0aa;transition:color .2s}
+.nav a:hover{color:var(--text)}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-size:13.5px;font-weight:600;font-family:inherit;letter-spacing:.01em;
+  padding:12px 20px;border-radius:9px;border:1px solid transparent;cursor:pointer;
+  transition:transform .18s, box-shadow .25s, background .25s, border-color .25s, color .2s;
+  white-space:nowrap;
+}
+.btn-gold{
+  color:#191307;
+  background:linear-gradient(180deg,#f0d3a0,#d3a967);
+  box-shadow:0 10px 26px -12px rgba(213,173,110,.7), inset 0 1px 0 rgba(255,255,255,.5);
+}
+.btn-gold:hover{transform:translateY(-1px);box-shadow:0 16px 34px -14px rgba(213,173,110,.85), inset 0 1px 0 rgba(255,255,255,.6)}
+.btn-ghost{color:var(--text);background:rgba(255,255,255,.03);border-color:var(--line-2)}
+.btn-ghost:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.24)}
+.btn-lg{padding:15px 24px;font-size:14.5px;border-radius:10px}
+
+/* ---------- hero ---------- */
+.hero{padding:150px 0 96px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1fr;align-items:center}
+.hero-grid>div{max-width:780px}
+.eyebrow{
+  font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);display:flex;align-items:center;gap:9px;margin:0;
+}
+.eyebrow::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--gold);flex:none}
+.eyebrow.plain::before{display:none}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:9px;margin-bottom:18px;
+  font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:#f0cf95;border:1px solid rgba(231,192,124,.28);border-radius:999px;
+  background:rgba(231,192,124,.07);padding:7px 14px 7px 11px;
+}
+.hero-badge span{width:5px;height:5px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px rgba(231,192,124,.16);flex:none}
+
+h1{
+  font-size:clamp(46px,6.6vw,82px);line-height:.94;letter-spacing:-.045em;
+  font-weight:800;margin:22px 0 0;
+}
+h1 span{display:block}
+.hero-sub{font-size:15.5px;color:#a9a29b;margin:26px 0 0;max-width:44ch}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.hero-notes{display:flex;flex-wrap:wrap;gap:26px;margin-top:34px}
+.hero-notes span{
+  font-size:11px;letter-spacing:.04em;color:#7e7873;display:flex;align-items:center;gap:8px;
+}
+.hero-notes span::before{content:"";width:3px;height:3px;border-radius:50%;background:var(--gold-2)}
+
+
+/* ---------- marquee ---------- */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:20px 0;position:relative;z-index:1}
+.marquee-track{display:flex;width:max-content;animation:scroll 42s linear infinite}
+.marquee-group{display:flex;align-items:center;gap:52px;padding-right:52px}
+.marquee-group span{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:#8f8984;white-space:nowrap}
+.marquee-group i{font-style:normal;color:var(--gold);font-size:12px}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ---------- sections ---------- */
+.section{padding:116px 0;position:relative;z-index:1}
+.sec-head{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:end;margin-bottom:54px}
+.sec-head p{font-size:14px;color:#948e88;max-width:40ch;margin:0;justify-self:end;text-align:left}
+h2{
+  font-size:clamp(34px,4.6vw,56px);line-height:1.02;letter-spacing:-.04em;
+  font-weight:800;margin:16px 0 0;
+}
+h2 span{display:block}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{
+  position:relative;overflow:hidden;border-radius:14px;padding:32px 30px 38px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg,#100d10,#0b090a);
+  transition:transform .3s,border-color .3s;
+}
+.card:hover{transform:translateY(-3px);border-color:rgba(231,192,124,.24)}
+.card::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;
+  background:linear-gradient(90deg,rgba(231,192,124,0),rgba(231,192,124,.85) 25%,rgba(231,192,124,0));
+  opacity:.55;transition:opacity .3s;
+}
+.card:hover::after{opacity:1}
+.card .ico{width:30px;height:30px;display:grid;place-items:center;color:var(--gold);margin-bottom:26px}
+.card .kicker{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#8a8079;margin:0 0 12px}
+.card h3{font-size:20px;font-weight:700;letter-spacing:-.02em;margin:0 0 12px}
+.card p{font-size:13.5px;line-height:1.65;color:#928c86;margin:0}
+
+/* showcase */
+.show-grid{display:grid;grid-template-columns:1fr;gap:22px}
+.show{
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  background:#0c0a0b;transition:border-color .3s,transform .3s;
+}
+.show:hover{border-color:rgba(255,255,255,.17);transform:translateY(-3px)}
+.show-media{position:relative;aspect-ratio:16/10;overflow:hidden}
+.show-foot{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:16px 20px;border-top:1px solid var(--line);background:rgba(255,255,255,.015);
+}
+.show-foot b{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:#cfc8c1}
+.show-foot b em{font-style:normal;color:var(--gold);margin-right:10px}
+.show-foot svg{width:14px;height:14px;color:var(--gold);opacity:.85}
+
+/* scene 2 */
+.scene-b{
+  padding:26px 24px;display:flex;flex-direction:column;justify-content:center;
+  background:
+    radial-gradient(70% 60% at 78% 18%, rgba(139,108,240,.30), transparent 70%),
+    radial-gradient(60% 60% at 12% 88%, rgba(70,110,240,.18), transparent 72%),
+    linear-gradient(180deg,#0d0a14,#0a0810);
+}
+.scene-b h3{font-size:clamp(24px,3.4vw,40px);font-weight:800;letter-spacing:-.03em;margin:0;text-align:center}
+.scene-b h3 em{font-style:normal;color:#a894ff}
+.scene-b .sub{font-size:10.5px;color:#8a8398;text-align:center;margin:8px 0 20px;line-height:1.6}
+.show-grid .scene-b{aspect-ratio:auto;padding:56px 52px 60px}
+.det{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 28px}
+.det div{display:flex;gap:9px;align-items:flex-start}
+.det .dot{width:16px;height:16px;border-radius:5px;flex:none;display:grid;place-items:center;background:rgba(139,108,240,.18);color:#b9a6ff;font-size:8px;margin-top:1px}
+.det b{display:block;font-size:10px;font-weight:600;color:#ded8ee;letter-spacing:.01em}
+.det small{display:block;font-size:8.5px;line-height:1.5;color:#7d7789;margin-top:2px}
+
+section[id]{scroll-margin-top:96px}
+
+/* ---------- modules ---------- */
+.mod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.mod-cat{border:1px solid var(--line);border-radius:12px;padding:19px 19px 21px;background:linear-gradient(180deg,#0f0c0f,#0a0809);transition:border-color .3s ease,transform .3s ease}
+.mod-cat:hover{border-color:rgba(231,192,124,.22);transform:translateY(-2px)}
+.mod-cat header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:11px;margin-bottom:13px;border-bottom:1px solid var(--line)}
+.mod-name{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.mod-count{font-size:9.5px;letter-spacing:.1em;color:#6b6663}
+.mod-cat ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.mod-cat li{font-size:11.5px;color:#a29b95;line-height:1.3;display:flex;align-items:baseline;gap:8px}
+.mod-cat li em{margin-left:auto;font-style:normal;font-size:9px;letter-spacing:.06em;color:#6b6663;border:1px solid var(--line);border-radius:4px;padding:1px 4px}
+@media (max-width:1000px){.mod-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.mod-grid{grid-template-columns:1fr}}
+
+/* ---------- cta ---------- */
+.cta{
+  position:relative;overflow:hidden;border-radius:18px;border:1px solid rgba(231,192,124,.16);
+  background:linear-gradient(120deg,#100d0c 0%,#0b0908 55%,#120e0a 100%);
+  padding:56px 56px;display:grid;grid-template-columns:1fr auto;gap:44px;align-items:center;
+  box-shadow:0 50px 120px -60px rgba(231,192,124,.35);
+}
+.cta::before{
+  content:"";position:absolute;right:-8%;top:-40%;width:62%;height:180%;
+  background:radial-gradient(closest-side,rgba(231,192,124,.16),transparent 72%);pointer-events:none;
+}
+.cta-in{position:relative}
+.cta h2{margin-top:18px}
+.cta p{font-size:14px;color:#9b948e;margin:16px 0 28px}
+.cta-actions{display:flex;flex-wrap:wrap;gap:12px}
+.cta .fine{font-size:10.5px;color:#6f6a65;margin:16px 0 0}
+.ans a,.fine a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(231,192,124,.4);transition:color .2s,border-color .2s}
+.ans a:hover,.fine a:hover{color:#f7e0ba;border-color:var(--gold)}
+.cta-mark{position:relative;display:flex;flex-direction:column;align-items:center;gap:14px;padding-right:16px}
+.cta-mark svg{width:112px;height:123px;filter:drop-shadow(0 12px 40px rgba(231,192,124,.35))}
+.cta-mark span{font-size:13px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#e6c48b}
+.cta-mark small{font-size:8.5px;letter-spacing:.3em;text-transform:uppercase;color:#7b7269;margin-top:-8px}
+
+/* ---------- faq ---------- */
+.faq-list{margin-top:8px}
+details{border-top:1px solid var(--line)}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding:22px 2px;font-size:14.5px;font-weight:500;color:#e7e2dc;transition:color .2s;
+}
+summary:hover{color:#fff}
+summary::-webkit-details-marker{display:none}
+summary .plus{
+  flex:none;width:22px;height:22px;display:grid;place-items:center;color:var(--gold);
+  font-size:16px;line-height:1;transition:transform .25s;
+}
+details[open] summary .plus{transform:rotate(45deg)}
+details .ans{padding:0 60px 24px 2px;font-size:13.5px;line-height:1.7;color:#8f8983;max-width:76ch;margin-top:-4px}
+
+/* ---------- footer ---------- */
+.site-foot{border-top:1px solid var(--line);padding:34px 0 44px;position:relative;z-index:1}
+.foot-in{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
+.foot-in .brand span{font-size:11.5px}
+.foot-links{display:flex;gap:26px;flex-wrap:wrap}
+.foot-links a{font-size:12.5px;color:#8b8580;transition:color .2s}
+.foot-links a:hover{color:var(--text)}
+.copy{width:100%;font-size:11px;color:#615c58;border-top:1px solid rgba(255,255,255,.05);padding-top:22px;margin-top:6px}
+
+/* ---------- reveal ---------- */
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.22,.7,.3,1),transform .7s cubic-bezier(.22,.7,.3,1)}
+.js .reveal.in{opacity:1;transform:none}
+
+/* ---------- responsive ---------- */
+@media (max-width:1000px){
+  .hero{padding:130px 0 76px}
+  .hero-grid{grid-template-columns:1fr;gap:52px}
+  .hero-sub{max-width:52ch}
+  .sec-head{grid-template-columns:1fr;gap:18px;margin-bottom:40px}
+  .sec-head p{justify-self:start;max-width:46ch}
+  .cards{grid-template-columns:1fr;gap:16px}
+  .show-grid{grid-template-columns:1fr}
+  .cta{grid-template-columns:1fr;padding:40px 32px;gap:34px}
+  .cta-mark{align-items:flex-start;padding-right:0}
+  .cta-mark svg{width:82px;height:90px}
+}
+@media (max-width:760px){
+  .nav a{display:none}
+  .head-in{height:68px;gap:14px}
+  .section{padding:84px 0}
+  .gui-body{grid-template-columns:1fr 1fr;gap:8px;padding:11px}
+  .gui-cat:not(:first-child){margin-top:11px}
+  details .ans{padding-right:8px}
+}
+@media (max-width:480px){
+  .wrap{padding:0 18px}
+  .hero-notes{gap:16px}
+  .det{grid-template-columns:1fr}
+  .scene-b{padding:20px 18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .marquee-track{animation:none}
+  .js .reveal{opacity:1;transform:none;transition:none}
+  *{transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="anubis-gold" x1="46" y1="10" x2="158" y2="212" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f9e5c0"/><stop offset=".48" stop-color="#e3b24c"/><stop offset="1" stop-color="#b07f3a"/>
+    </linearGradient>
+  </defs>
+  <symbol id="anubis-mark" viewBox="0 0 200 220">
+    <g stroke="url(#anubis-gold)" stroke-width="2.4" stroke-linecap="round" opacity=".38">
+      <path d="M52 118h96"/>
+      <path d="M56 134h88"/>
+      <path d="M62 150h76"/>
+      <path d="M72 166h56"/>
+    </g>
+    <g fill="url(#anubis-gold)">
+      <path d="M120 8 139 72 109 64Z"/>
+      <path d="M80 8 61 72 91 64Z"/>
+      <path d="M100 56c19 0 41 17 45 40 3 19-5 39-17 55-10 14-20 26-28 36z"/>
+      <path d="M100 56c-19 0-41 17-45 40-3 19 5 39 17 55 10 14 20 26 28 36z"/>
+    </g>
+    <g fill="none" stroke="#08070a" stroke-width="3.4" stroke-linecap="round">
+      <circle cx="100" cy="84" r="5"/>
+      <path d="M100 89v25"/>
+      <path d="M91 95h18"/>
+    </g>
+    <path d="M62 196c11 13 24 19 38 19s27-6 38-19" fill="none" stroke="url(#anubis-gold)" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="100" cy="207" r="5.5" fill="url(#anubis-gold)"/>
+  </symbol>
+</svg>
+
+<!-- ================= HEADER ================= -->
+<header class="site-head" id="head">
+  <div class="wrap head-in">
+    <a class="brand" href="#top">
+      <svg class="logo-mark" viewBox="0 0 200 220" aria-hidden="true"><use href="#anubis-mark"/></svg>
+      <span>Anubis <em>Client</em></span>
+    </a>
+    <nav class="nav">
+      <a href="#features">Features</a>
+      <a href="#showcase">Showcase</a>
+      <a href="#modules">Modules</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-ghost" href="Anubis%20Client%201.0.jar" download="Anubis Client 1.0.jar">Get the client ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-badge"><span></span>Stable release 1.0</div>
+        <p class="eyebrow">Built for your next session</p>
+        <h1>
+          <span>The most</span>
+          <span class="grad">powerful</span>
+          <span class="grad">client.</span>
+        </h1>
+        <p class="hero-sub">125 modules. Lightweight. Built for DonutSMP.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold btn-lg" href="Anubis%20Client%201.0.jar" download="Anubis Client 1.0.jar">Download Anubis ↓</a>
+          <a class="btn btn-ghost btn-lg" href="#showcase">
+            <svg width="11" height="12" viewBox="0 0 11 12" fill="currentColor" aria-hidden="true"><path d="M0 0l11 6-11 6V0z"/></svg>
+            See the showcase
+          </a>
+        </div>
+        <div class="hero-notes">
+          <span>Lightweight design</span>
+          <span>Made for Minecraft</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= MARQUEE ================= -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="marquee-group">
+        <span>Built to stand out</span><i>✳</i>
+        <span>Made for the grind</span><i>✳</i>
+        <span>Anubis Client</span><i>✳</i>
+        <span>Built to stand out</span><i>✳</i>
+        <span>Made for the grind</span><i>✳</i>
+      </div>
+      <div class="marquee-group">
+        <span>Built to stand out</span><i>✳</i>
+        <span>Made for the grind</span><i>✳</i>
+        <span>Anubis Client</span><i>✳</i>
+        <span>Built to stand out</span><i>✳</i>
+        <span>Made for the grind</span><i>✳</i>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FEATURES ================= -->
+  <section class="section" id="features">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow plain">The difference</p>
+          <h2>
+            <span>More than a</span>
+            <span class="grad">new look.</span>
+          </h2>
+        </div>
+        <p>Designed to feel intentional from the first launch. Keep the setup simple and make every session your own.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card reveal">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M10 1.5 18.5 10 10 18.5 1.5 10 10 1.5Z" stroke="currentColor" stroke-width="1.3"/><path d="M10 6.6 13.4 10 10 13.4 6.6 10 10 6.6Z" stroke="currentColor" stroke-width="1.3" opacity=".6"/>
+            </svg>
+          </div>
+          <p class="kicker">01 / Design</p>
+          <h3>Clean by nature</h3>
+          <p>A considered interface with a dark, focused aesthetic that keeps the experience feeling polished.</p>
+        </article>
+
+        <article class="card reveal">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M2 10h4l2-5 3 10 2-5h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="kicker">02 / Control</p>
+          <h3>Your setup, your way</h3>
+          <p>Toggle modules, tune values and save configs so your layout is exactly how you like it, every launch.</p>
+        </article>
+
+        <article class="card reveal">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M10 2.2 12 8l5.8 2-5.8 2-2 5.8-2-5.8L2.2 10 8 8l2-5.8Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="kicker">03 / Community</p>
+          <h3>Built together</h3>
+          <p>One clear place for updates, downloads and the people you play with.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SHOWCASE ================= -->
+  <section class="section" id="showcase">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow plain">Take a closer look</p>
+          <h2>
+            <span>Made to be</span>
+            <span class="grad">seen.</span>
+          </h2>
+        </div>
+        <p>A closer look at what makes the client feel different.</p>
+      </div>
+
+      <div class="show-grid">
+
+        <article class="show reveal">
+          <div class="show-media scene-b">
+            <h3>The <em>Details</em></h3>
+            <p class="sub">Everything you need, nothing you don't.<br>Built with performance first and a clean interface.</p>
+            <div class="det">
+              <div><span class="dot">✦</span><span><b>Combat</b><small>Kill Aura, crystal aura, totems and triggerbot</small></span></div>
+              <div><span class="dot">✦</span><span><b>Movement</b><small>Speed, fly, elytra and traversal</small></span></div>
+              <div><span class="dot">✦</span><span><b>Render</b><small>ESP, nametags, tracers and waypoints</small></span></div>
+              <div><span class="dot">✦</span><span><b>Visuals</b><small>Animations, hit particles and 3D hands</small></span></div>
+              <div><span class="dot">✦</span><span><b>Donut</b><small>Spawner tools, staff list and fake stats</small></span></div>
+              <div><span class="dot">✦</span><span><b>Base Finding</b><small>Chunk scanners and bypasses</small></span></div>
+            </div>
+          </div>
+          <div class="show-foot">
+            <b><em>01</em> The details</b>
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MODULES ================= -->
+  <section class="section" id="modules">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow plain">Everything included</p>
+          <h2>
+            <span>125 modules,</span>
+            <span class="grad">out of the box.</span>
+          </h2>
+        </div>
+        <p>Every module in the client, grouped exactly the way the menu groups them. Toggle any of them in-game, bind them to a key, or save them to a config.</p>
+      </div>
+
+      <div class="mod-grid">
+        <article class="mod-cat reveal">
+          <header><span class="mod-name">Combat</span><span class="mod-count">20</span></header>
+          <ul>
+            <li>Aim Assist</li><li>Anchor Aura</li><li>Anchor Macro</li><li>Auto City</li>
+            <li>Auto Inventory Totem</li><li>Auto Totem</li><li>Crystal Aura</li><li>Crystal Macro</li>
+            <li>Crystal Optimizer</li><li>FastXP</li><li>Friend Guard</li><li>Hover Totem</li>
+            <li>Jump Reset</li><li>Key Throw</li><li>Kill Aura</li><li>Mace</li>
+            <li>Shield Breaker</li><li>Spear Swap</li><li>Triggerbot</li><li>W Tap</li>
+          </ul>
+        </article>
+
+        <article class="mod-cat reveal">
+          <header><span class="mod-name">Movement</span><span class="mod-count">17</span></header>
+          <ul>
+            <li>Auto Jump</li><li>Auto Walk</li><li>Boat Fly</li><li>Boat Noclip</li>
+            <li>Click TP</li><li>Elytra Fly</li><li>Elytra Swap</li><li>Entity Control</li>
+            <li>Entity Speed</li><li>Fly</li><li>Jesus</li><li>No Jump Delay</li>
+            <li>Sneak</li><li>Speed</li><li>Spider</li><li>Sprint</li>
+            <li>Trident Boost</li>
+          </ul>
+        </article>
+
+        <article class="mod-cat reveal">
+          <header><span class="mod-name">Render</span><span class="mod-count">18</span></header>
+          <ul>
+            <li>Block ESP</li><li>ESP</li><li>FreeLook</li><li>Fullbright</li>
+            <li>Glow ESP</li><li>Hole ESP</li><li>Item ESP</li><li>Low Health Warning</li>
+            <li>Nametags</li><li>No Render</li><li>Pearl Trajectory</li><li>Spawner Nametags</li>
+            <li>Storage ESP</li><li>Time Changer</li><li>Tracers</li><li>Trajectories</li>
+            <li>Waypoints</li><li>Xray <em>X</em></li>
+          </ul>
+        </article>
+
+        <article class="mod-cat reveal">
+          <header><span class="mod-name">Visuals</span><span class="mod-count">20</span></header>
+          <ul>
+            <li>3D Character</li><li>3D Hand</li><li>Atmosphere</li><li>Block Overlay</li>
+            <li>Color Grading</li><li>CS Knife</li><li>Custom Crosshair</li><li>Custom Fov</li>
+            <li>Custom Glint</li><li>Floating Relics</li><li>Hand Aura</li><li>Hand Pose</li>
+            <li>Hit Particles</li><li>Jump Circles</li><li>Motion Blur</li><li>Particles</li>
+            <li>Pharaoh Headress</li><li>Swing Animation</li><li>Target ESP</li><li>Totem Spirit</li>
+          </ul>
+        </article>
+
+        <article class="mod-cat reveal">
+          <header><span class="mod-name">Donut</span><span class="mod-count">13</span></header>
+          <ul>
+            <li>Air Stuck <em>Z</em></li><li>Anti Trap</li><li>Anti Vanish</li><li>Auto Relog</li>
+            <li>Donut NoFall</li><li>Donut Speed Mine</li><li>Fake Stats</li><li>Netherite Finder</li>
+            <li>Player Detection</li><li>Spawner Notifier</li><li>Spawner Protect</li><li>Staff List</li>
+            <li>Trident Util</li>
+          </ul>
+        </article>
+
+        <article class="mod-cat reveal">
+          <header><span class="mod-name">Base Finding</span><span class="mod-count">12</span></header>
+          <ul>
+            <li>Amethyst Bypass</li><li>Better Sus Chunk</li><li>Block Entity Debug</li><li>Chunk Finder</li>
+            <li>Chunk Scanner</li><li>Home Meta</li><li>Light Debug</li><li>Player Bypass</li>
+            <li>Player Bypass 2</li><li>Quantum &amp; Render</li><li>Render Distance Toggle <em>8</em></li><li>Sus Chunk Finder</li>
+          </ul>
+        </article>
+
+        <article class="mod-cat reveal">
+          <header><span class="mod-name">Misc</span><span class="mod-count">17</span></header>
+          <ul>
+            <li>Auto Clicker</li><li>Auto Eat</li><li>Auto Reconnect</li><li>Auto Replenish</li>
+            <li>Block Notifier</li><li>Chat Macro</li><li>Coord Snapper</li><li>Fast Use</li>
+            <li>Freecam <em>U</em></li><li>Legit Auto Tool</li><li>Name Protect</li><li>No Inv Leak</li>
+            <li>Skin Change</li><li>Slow Swing</li><li>Spam</li><li>Vehicle Log</li>
+            <li>Weather Notifier</li>
+          </ul>
+        </article>
+
+        <article class="mod-cat reveal">
+          <header><span class="mod-name">Macro</span><span class="mod-count">8</span></header>
+          <ul>
+            <li>AH Sell</li><li>AH Sniper</li><li>Auto Sell</li><li>Order AH Trader</li>
+            <li>Order Dropper</li><li>Panic Pay</li><li>Tp Macro</li><li>Tpahere Kill Bot</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="section" id="download" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta reveal">
+        <div class="cta-in">
+          <p class="eyebrow">Ready when you are</p>
+          <h2>
+            <span>Your next session</span>
+            <span>starts <span class="grad">here.</span></span>
+          </h2>
+          <p>Get Anubis Client and jump back into the game.</p>
+          <div class="cta-actions">
+            <a class="btn btn-gold btn-lg" href="Anubis%20Client%201.0.jar" download="Anubis Client 1.0.jar">Download Anubis ↓</a>
+            <a class="btn btn-ghost btn-lg" href="https://discord.com/invite/anubis" target="_blank" rel="noopener">Join the Discord ↗</a>
+          </div>
+          <p class="fine">Version 1.0 · 20 MB. Updates and support run through the <a href="https://discord.com/invite/anubis" target="_blank" rel="noopener">Anubis Discord</a>.</p>
+        </div>
+        <div class="cta-mark" aria-hidden="true">
+          <svg viewBox="0 0 200 220" aria-hidden="true"><use href="#anubis-mark"/></svg>
+          <span>Anubis</span>
+          <small>Client</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="section" id="faq" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal" style="margin-bottom:26px">
+        <div>
+          <p class="eyebrow plain">Good to know</p>
+          <h2><span>Quick <span class="grad">answers.</span></span></h2>
+        </div>
+        <p>Useful details for visitors before they join the community or download.</p>
+      </div>
+
+      <div class="faq-list reveal">
+        <details open>
+          <summary>Where do I download Anubis Client?<span class="plus">+</span></summary>
+          <div class="ans">Downloads are posted in the <a href="https://discord.com/invite/anubis" target="_blank" rel="noopener">Anubis Discord</a> and linked from the download button on this page. Always grab the file from an official source — reposted builds are not something we can vouch for.</div>
+        </details>
+        <details>
+          <summary>Is Anubis still in beta?<span class="plus">+</span></summary>
+          <div class="ans">No — Anubis is on the stable 1.0 release, and every update ships through the <a href="https://discord.com/invite/anubis" target="_blank" rel="noopener">Anubis Discord</a>.</div>
+        </details>
+        <details>
+          <summary>Which Minecraft versions are supported?<span class="plus">+</span></summary>
+          <div class="ans">The current release targets the mainstream client versions used on DonutSMP. Version support is listed in the release notes alongside each download.</div>
+        </details>
+        <details>
+          <summary>How do I install it?<span class="plus">+</span></summary>
+          <div class="ans">Drop the client into your usual Minecraft setup, launch it, then open the module menu with the default keybind. Your configs are saved automatically and restored on the next launch.</div>
+        </details>
+        <details>
+          <summary>Can I change the look and keybinds?<span class="plus">+</span></summary>
+          <div class="ans">Yes. Every module can be rebound, the menu supports presets, and you can save multiple configs for different sessions.</div>
+        </details>
+        <details>
+          <summary>Where do I get support or report a bug?<span class="plus">+</span></summary>
+          <div class="ans">The <a href="https://discord.com/invite/anubis" target="_blank" rel="noopener">Anubis Discord</a> is the fastest route — bug reports and feature requests are tracked there so fixes ship in the next update.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-in">
+      <a class="brand" href="#top">
+        <svg class="logo-mark" viewBox="0 0 200 220" aria-hidden="true"><use href="#anubis-mark"/></svg>
+        <span>Anubis <em>Client</em></span>
+      </a>
+      <nav class="foot-links">
+        <a href="#features">Features</a>
+        <a href="#showcase">Showcase</a>
+        <a href="#modules">Modules</a>
+        <a href="#faq">FAQ</a>
+        <a href="Anubis%20Client%201.0.jar" download="Anubis Client 1.0.jar">Download</a>
+        <a href="https://discord.com/invite/anubis" target="_blank" rel="noopener">Discord ↗</a>
+      </nav>
+    </div>
+    <p class="copy">© 2026 Anubis Client. Not affiliated with Mojang Studios, Microsoft or DonutSMP.</p>
+  </div>
+</footer>
+
+<script>
+  // header state on scroll
+  var head = document.getElementById('head');
+  var onScroll = function () {
+    head.classList.toggle('scrolled', window.scrollY > 8);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // reveal on scroll
+  var items = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    items.forEach(function (el, i) {
+      el.style.transitionDelay = (Math.min(i, 5) * 60) + 'ms';
+      io.observe(el);
+    });
+  } else {
+    items.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  // close other FAQ items (accordion behaviour)
+  document.querySelectorAll('details').forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (!d.open) return;
+      document.querySelectorAll('details').forEach(function (o) {
+        if (o !== d) o.open = false;
+      });
+    });
+  });
+</script>
+</body>
+</html>
